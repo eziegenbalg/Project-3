@@ -1,6 +1,17 @@
+CC        = cc
+CSOURCE   = main.c purple_malloc.c tree.c
+EXECBIN   = purple_malloc
 
+all : ${EXECBIN}
 
-all:
-	gcc -c -o tree.o tree.c
-	gcc -c -o purple_malloc.o purple_malloc.c
-	gcc -o purple_malloc purple_malloc.o tree.o
+${EXECBIN} : ${CSOURCE:.c=.o}
+	${CC} -o $@ ${CSOURCE:.c=.o}
+
+%.o : %.c
+	${CC} -c $<
+
+clean:
+	-rm ${CSOURCE:.c=.o} ${EXECBIN}
+
+move:
+	cp ${CSOURCE} ~/Desktop/MINIX/root/Project-3
