@@ -18,7 +18,9 @@ void main()
  slug_memstat(root);
 }
 
-void slug_malloc();
+void slug_malloc(void) {
+
+}
 void slug_free();
 
 void slug_memstat(struct node *root) 
