@@ -178,3 +178,16 @@ int isInTree(struct node *root,void *addr){
    isInTree(root->right,addr);
    
 }
+
+void print_tree(struct node *root)
+{
+   if(root == NULL) return;
+   print_tree(root->left);
+   printf("=== Node @ %p Color: %i ===\nAddress: %p\nLength: %i\n"
+          "Location: %s\nTimestamp: %ld\n"
+          "===========================\n",
+          root, root->color, root->address, root->length,
+          root->location, (long) root->timestamp);
+
+   print_tree(root->right);
+}
