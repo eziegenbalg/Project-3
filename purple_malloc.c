@@ -28,10 +28,10 @@ void *slug_malloc(size_t size, char *WHERE) {
    }
    tmp = malloc(size);
    if(root == NULL){
-      root = create_node(tmp,size,0,timestamp);
+      root = create_node(tmp,size,WHERE,timestamp);
    }
    else{
-      insert(root, create_node(tmp, size, 0, timestamp)); 
+      insert(root, create_node(tmp, size, WHERE, timestamp)); 
    }
    slug_memstat();
    printf("\n\n");
