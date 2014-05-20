@@ -35,7 +35,7 @@ struct node *insert(struct node *root, struct node *n)
 struct node *create_node(void *address, size_t length, char *location, long timestamp)
 {
  struct node *n = malloc(sizeof(struct node));
- if(n == NULL) return ENOMEM;
+ if(n == NULL) return NULL;
 
  n->address = address;
  n->length = length;
@@ -62,7 +62,7 @@ struct node *uncle(struct node *n)
 {
  struct node *g = grandparent(n);
  if (g == NULL)
-  return NULL; // No grandparent means no uncle
+  return NULL; 
  if (n->parent == g->left)
   return g->right;
  else

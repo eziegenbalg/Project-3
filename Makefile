@@ -1,5 +1,6 @@
 CC        = cc
 CSOURCE   = main.c purple_malloc.c tree.c
+CHEADER	 = purple_malloc.h tree.h
 EXECBIN   = purple_malloc
 
 all : ${EXECBIN}
@@ -14,4 +15,4 @@ clean:
 	-rm ${CSOURCE:.c=.o} ${EXECBIN}
 
 move:
-	cp ${CSOURCE} ~/Desktop/MINIX/root/Project-3
+	cp ${CSOURCE} ${CHEADER} ~/Desktop/MINIX/root/Project-3

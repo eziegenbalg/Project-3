@@ -11,6 +11,7 @@ extern struct node *root;
 
 void *slug_malloc(size_t size, char *WHERE) {
    
+   void *tmp;
    long timestamp = 0;
    
    if(size > MAX_SIZE) { 
@@ -26,7 +27,7 @@ void *slug_malloc(size_t size, char *WHERE) {
       timestamp = (long)(tv.tv_sec * 1e6 + tv.tv_usec);
    }
    
-   void *tmp = malloc(size);
+   tmp = malloc(size);
    insert(root, create_node(tmp, size, 0, timestamp)); 
    return tmp;
 }
@@ -42,10 +43,10 @@ void slug_memstat(struct node *root)
    if(root == NULL) return;
    slug_memstat(root->left);
    printf("=== Node @ %p Color: %i ===\nAddress: %p\nLength: %i\n"
-          "Location: %p\nTimestamp: %lld\n"
+          "Location: %s\nTimestamp: %ld\n"
           "===========================\n", 
           root, root->color, root->address, root->length,
-          root->location, (long long) root->timestamp); 
+          root->location, (long) root->timestamp); 
 
    slug_memstat(root->right);
 }
