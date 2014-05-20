@@ -32,7 +32,7 @@ struct node *insert(struct node *root, struct node *n)
 
 }
 
-struct node *create_node(int *address, int length, int *location, time_t timestamp)
+struct node *create_node(void *address, size_t length, char *location, long timestamp)
 {
  struct node *n = malloc(sizeof(struct node));
  if(n == NULL) return ENOMEM;

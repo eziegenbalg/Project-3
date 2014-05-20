@@ -13,10 +13,10 @@ struct node *create_node(int *address, int length, int *location, time_t timesta
 
 struct node {
   /* data */
-  int *address;
-  int length;
-  int *location;
-  time_t timestamp;
+  void *address;
+  size_t length;
+  char *location;
+  long timestamp;
  
   /* used for tree */
   int color;
