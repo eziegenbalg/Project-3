@@ -1,7 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include "purple_malloc.h"
-//#include "tree.h"
 
 #define FUNCTIONIZE(a,b)   a(b)
 #define STRINGIZE(a)       #a

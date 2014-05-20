@@ -6,7 +6,7 @@
 #include "tree.h"
 #include "purple_malloc.h"
 
-#define MAX_SIZE 100000
+#define MAX_SIZE 134217728
 
 struct timeval tv;
 struct node *root;
@@ -43,27 +43,29 @@ double mean()
 void *slug_malloc(size_t size, char *WHERE) {
    
    void *tmp;
-   long timestamp = 0;
+   double timestamp = 0;
    
    if(size > MAX_SIZE) { 
-      printf("Cannot allocate more than 128MiB\n");
-      exit(1);
+      fprintf(stderr, "Cannot allocate more than 128MiB\n");
+      exit(EXIT_FAILURE);
    }
 
    if(size == 0) {
-      printf("Malloced size of 0\n");
+      fprintf(stderr, "Malloced size of 0\n");
    }
 
    if(!gettimeofday(&tv, NULL)) {
-      timestamp = (long)(tv.tv_sec * 1e6 + tv.tv_usec);
+      timestamp = tv.tv_sec * 1e6 + tv.tv_usec;
    }
+
    tmp = malloc(size);
+   
    if(root == NULL){
       root = create_node(tmp,size,WHERE,timestamp);
-   }
-   else{
+   }else{
       insert(root, create_node(tmp, size, WHERE, timestamp)); 
    }
+   
    info.total_allocs++;
    info.active_allocs++;
    info.total_size += size;
@@ -83,7 +85,7 @@ void slug_free(void *addr, char *WHERE) {
 void slug_memstat(void) 
 {
    print_tree(root);
-//   if((info.count - 1) == info.index){
+   /*if((info.count - 1) == info.index){ */
    printf("Total allocations: %d\n" , info.total_allocs);
    printf("Active allocations: %d\n\n" , info.active_allocs);
 
@@ -93,7 +95,7 @@ void slug_memstat(void)
    printf("Mean of total allocs: %.2f\n", mean());
    /*printf("Standard Deviation: %0.2f\n", standard_dev());*/
    info.count = 0;
- //  }
+   /*}*/
 
 }
 

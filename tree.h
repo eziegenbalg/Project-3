@@ -16,7 +16,7 @@ struct node {
   void *address;
   size_t length;
   char *location;
-  long timestamp;
+  double timestamp;
  
   /* used for tree */
   int color;
@@ -28,6 +28,6 @@ struct node {
 
 /* Red Black functions */
 struct node *insert(struct node* root, struct node *n);
-struct node *create_node(void *address, size_t length, char *location, long timestamp);
+struct node *create_node(void *address, size_t length, char *location, double timestamp);
 
 #endif

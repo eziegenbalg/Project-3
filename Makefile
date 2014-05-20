@@ -15,4 +15,4 @@ clean:
 	-rm ${CSOURCE:.c=.o} ${EXECBIN}
 
 move:
-	cp ${CSOURCE} ${CHEADER} ~/Desktop/MINIX/root/Project-3
+	cp ${CSOURCE} ${CHEADER} Makefile ~/Desktop/MINIX/root/Project-3

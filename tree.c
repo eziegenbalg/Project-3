@@ -32,7 +32,7 @@ struct node *insert(struct node *root, struct node *n)
 
 }
 
-struct node *create_node(void *address, size_t length, char *location, long timestamp)
+struct node *create_node(void *address, size_t length, char *location, double timestamp)
 {
  struct node *n = malloc(sizeof(struct node));
  if(n == NULL) return NULL;
@@ -184,10 +184,10 @@ void print_tree(struct node *root)
    if(root == NULL) return;
    print_tree(root->left);
    printf("=== Node @ %p Color: %i ===\nAddress: %p\nLength: %i\n"
-          "Location: %s\nTimestamp: %ld\n"
+          "Location: %s\nTimestamp: %0.0f\n"
           "===========================\n",
           root, root->color, root->address, (int)root->length,
-          root->location, (long) root->timestamp);
+          root->location, root->timestamp);
 
    print_tree(root->right);
 }
