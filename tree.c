@@ -167,14 +167,14 @@ void rotate_left(struct node *g)
 }
 
  
-int isInTree(struct node *root,int *addr){
+int isInTree(struct node *root,void *addr){
    if(root == NULL){
       return;
    }
-   isInTree(root->left, addr);
+   isInTree(root->right,addr);
    if(addr == root->address){
       return 1;
    }
-   isInTree(root->right, addr);
+   isInTree(root->right,addr);
    
 }

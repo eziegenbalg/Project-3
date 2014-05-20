@@ -32,9 +32,10 @@ void *slug_malloc(size_t size, char *WHERE) {
    return tmp;
 }
 void slug_free(void *addr, char *WHERE) {
-   /*if(isInTree(addr)){
-        removeFromTree(addr)
-     }*/   
+   if(isInTree(root,addr) == 1){
+        printf("found it \n");
+       /* removeFromTree(addr)*/
+     }   
    free(addr);
 }
 
