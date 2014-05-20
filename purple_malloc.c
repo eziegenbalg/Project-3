@@ -4,18 +4,31 @@
 #include <stdio.h>
 #include "tree.h"
 
+#define MAX_SIZE 100000
+
 struct timeval tv;
 extern struct node *root;
 
 void *slug_malloc(size_t size, char *WHERE) {
-   if(!gettimeofday(&tv, NULL)) {
-      long timestamp = (long)(tv.tv_sec * 1e6 + tv.tv_usec);
-      /*printf("Malloced size of %zu from %s at %ld\n", size, WHERE, timestamp); */
-      void *tmp = malloc(size);
-      insert(root, create_node(tmp, size, 0, timestamp)); 
-      return tmp;
+   
+   long timestamp = 0;
+   
+   if(size > MAX_SIZE) { 
+      printf("Cannot allocate more than 128MiB\n");
+      exit(1);
    }
-   return NULL;
+
+   if(size == 0) {
+      printf("Malloced size of 0\n");
+   }
+
+   if(!gettimeofday(&tv, NULL)) {
+      timestamp = (long)(tv.tv_sec * 1e6 + tv.tv_usec);
+   }
+   
+   void *tmp = malloc(size);
+   insert(root, create_node(tmp, size, 0, timestamp)); 
+   return tmp;
 }
 void slug_free(void *addr, char *WHERE) {
    /*if(isInTree(addr)){
