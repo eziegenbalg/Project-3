@@ -3,6 +3,7 @@
 *.ko
 *.obj
 *.elf
+purple_malloc
 
 # Libraries
 *.lib
