@@ -169,14 +169,12 @@ void rotate_left(struct node *g)
  
 int isInTree(struct node *root,int *addr){
    if(root == NULL){
-      printf("Address was not in the tree\n");
       return;
    }
-
+   isInTree(root->left, addr);
    if(addr == root->address){
       return 1;
    }
    isInTree(root->right, addr);
-   isInTree(root->left, addr);
    
 }
