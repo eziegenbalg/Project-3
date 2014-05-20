@@ -14,7 +14,7 @@ struct node *create_node(int *address, int length, int *location, time_t timesta
 struct node {
   /* data */
   void *address;
-  int length;
+  size_t length;
   char *location;
   long timestamp;
  
