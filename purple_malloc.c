@@ -2,12 +2,43 @@
 #include <sys/types.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <math.h>
 #include "tree.h"
+#include "purple_malloc.h"
 
 #define MAX_SIZE 100000
 
 struct timeval tv;
 struct node *root;
+
+mem_info info;
+
+double mean()
+{
+   if(info.total_allocs > 0) return (double)(info.total_size/info.total_allocs);
+   return 0.0;
+}
+
+/*double standard_dev()
+{
+   int tmp[MAX_ALLOCS] = {0};
+   double tmp_mean = mean();
+   int i;
+   for(i = 0; i < info.index; ++i){
+      tmp[i] = pow((double)(info.lens[i] - tmp_mean), 2.0);
+   }
+
+   double total = 0.0;
+   for(i = 0; i < info.index; ++i){
+      total += (double)tmp[i];
+   }
+
+   total = total / info.index;
+   total = sqrt(total);
+
+   return total;
+}*/
+
 
 void *slug_malloc(size_t size, char *WHERE) {
    
@@ -33,8 +64,12 @@ void *slug_malloc(size_t size, char *WHERE) {
    else{
       insert(root, create_node(tmp, size, WHERE, timestamp)); 
    }
-   slug_memstat();
-   printf("\n\n");
+   info.total_allocs++;
+   info.active_allocs++;
+   info.total_size += size;
+   info.active_size += size;
+   info.lens[info.index] = size;
+   info.index++;
    return tmp;
 }
 void slug_free(void *addr, char *WHERE) {
@@ -42,20 +77,23 @@ void slug_free(void *addr, char *WHERE) {
        /* removeFromTree(addr)*/
      }   
    free(addr);
-   
+   info.active_allocs--;
 }
 
 void slug_memstat(void) 
 {
-   /*if(root == NULL) return;
-   slug_memstat(root->left);
-   printf("=== Node @ %p Color: %i ===\nAddress: %p\nLength: %i\n"
-          "Location: %s\nTimestamp: %ld\n"
-          "===========================\n", 
-          root, root->color, root->address, root->length,
-          root->location, (long) root->timestamp); 
-
-   slug_memstat(root->right);*/
    print_tree(root);
+//   if((info.count - 1) == info.index){
+   printf("Total allocations: %d\n" , info.total_allocs);
+   printf("Active allocations: %d\n\n" , info.active_allocs);
+
+   printf("Total size allocated: %.0f\n" , info.total_size);
+   printf("Active size allocated: %.0f\n\n" , info.active_size);
+
+   printf("Mean of total allocs: %.2f\n", mean());
+   /*printf("Standard Deviation: %0.2f\n", standard_dev());*/
+   info.count = 0;
+ //  }
+
 }
 

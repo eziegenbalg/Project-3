@@ -186,7 +186,7 @@ void print_tree(struct node *root)
    printf("=== Node @ %p Color: %i ===\nAddress: %p\nLength: %i\n"
           "Location: %s\nTimestamp: %ld\n"
           "===========================\n",
-          root, root->color, root->address, root->length,
+          root, root->color, root->address, (int)root->length,
           root->location, (long) root->timestamp);
 
    print_tree(root->right);
