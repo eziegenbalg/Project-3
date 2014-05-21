@@ -94,7 +94,7 @@ void slug_memstat(void)
    printf("Active size allocated: %.0f\n\n" , info.active_size);
 
    printf("Mean of total allocs: %.2f\n", mean());
-   /*printf("Standard Deviation: %0.2f\n", standard_dev());*/
+   printf("Standard Deviation: %0.2f\n", standard_dev());
    info.count = 0;
    /*}*/
 
