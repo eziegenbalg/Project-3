@@ -88,9 +88,16 @@ void *slug_malloc(size_t size, char *WHERE)
 }
 void slug_free(void *addr, char *WHERE) 
 {
-   if(isInTree(root,addr) == 1){
-       /* removeFromTree(addr)*/
-     }   
+   struct node *tmp;
+   tmp = isInTree(root,addr);
+   printf("its printing \n"); 
+/*   if(tmp != NULL){
+        delete_node(tmp);
+   }
+   else{
+      printf("Tried to free an invalid address \n");
+      return;
+   }*/  
    free(addr);
    info.active_allocs--;
 }

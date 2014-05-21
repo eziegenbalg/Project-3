@@ -32,6 +32,41 @@ struct node *insert(struct node *root, struct node *n)
 
 }
 
+/*Delete a node from the tree */
+
+void delete_node(struct node *addr){
+   /*Case 1: node is only leaf in the tree */
+   if(addr->left == NULL/* && addr->right == NULL*/){
+      free(addr);
+   }
+
+   /*Case 2: node has one child which needs to be connected to the nodes
+        parent  */
+   if(addr->left != NULL && addr->right == NULL){
+      addr->left->parent = addr->parent;
+      addr->parent->left = addr->left;
+      addr->left = NULL;
+      free(addr);
+      addr = NULL;
+   }
+   if(addr->right != NULL && addr->left == NULL){
+      addr->right->parent = addr->parent;
+      addr->parent->right = addr->right;
+      addr->right = NULL;
+      addr = NULL;
+      free(addr);
+   }
+   /*Case 3: node has 2 children */
+   if(addr->left != NULL && addr->right!= NULL){
+      addr->right->parent = addr->left->parent = addr->parent;
+      addr->parent->left = addr->left;
+      addr->parent->right = addr->right;
+      addr->right = addr->left = NULL;
+      addr = NULL;
+      free(addr);
+      }
+}
+
 struct node *create_node(void *address, size_t length, char *location, double timestamp)
 {
  struct node *n = malloc(sizeof(struct node));
@@ -167,20 +202,21 @@ void rotate_left(struct node *g)
 }
 
  
-int isInTree(struct node *root,void *addr){
+struct node *isInTree(struct node *root,void *addr){
    if(root == NULL){
-      return;
+      return NULL;
    }
    isInTree(root->right,addr);
    if(addr == root->address){
-      return 1;
+      return root;
    }
    isInTree(root->right,addr);
-   
+    
 }
 
 void print_tree(struct node *root)
 {
+//   if(root->address == NULL) return;
    if(root == NULL) return;
    print_tree(root->left);
    printf("=== Node @ %p Color: %i ===\nAddress: %p\nLength: %i\n"
