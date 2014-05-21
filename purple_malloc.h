@@ -8,6 +8,7 @@
 
 
 #define MAX_ALLOCS 100
+#define MAX_SIZE 134217728
 
 typedef struct{
    int total_allocs;

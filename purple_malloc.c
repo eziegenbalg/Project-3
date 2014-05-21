@@ -6,7 +6,6 @@
 #include "tree.h"
 #include "purple_malloc.h"
 
-#define MAX_SIZE 134217728
 
 struct timeval tv;
 struct node *root;
@@ -23,12 +22,12 @@ double standard_dev()
 {
    int tmp[MAX_ALLOCS] = {0};
    double tmp_mean = mean();
+   double total = 0.0;
    int i;
    for(i = 0; i < info.index; ++i){
       tmp[i] = pow((double)(info.lens[i] - tmp_mean), 2.0);
    }
 
-   double total = 0.0;
    for(i = 0; i < info.index; ++i){
       total += (double)tmp[i];
    }
