@@ -19,7 +19,7 @@ double mean()
    return 0.0;
 }
 
-/*double standard_dev()
+double standard_dev()
 {
    int tmp[MAX_ALLOCS] = {0};
    double tmp_mean = mean();
@@ -37,11 +37,11 @@ double mean()
    total = sqrt(total);
 
    return total;
-}*/
+}
 
 
-void *slug_malloc(size_t size, char *WHERE) {
-   
+void *slug_malloc(size_t size, char *WHERE) 
+{   
    void *tmp;
    double timestamp = 0;
    
@@ -74,7 +74,8 @@ void *slug_malloc(size_t size, char *WHERE) {
    info.index++;
    return tmp;
 }
-void slug_free(void *addr, char *WHERE) {
+void slug_free(void *addr, char *WHERE) 
+{
    if(isInTree(root,addr) == 1){
        /* removeFromTree(addr)*/
      }   
