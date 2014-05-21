@@ -11,6 +11,8 @@ struct timeval tv;
 struct node *root;
 
 mem_info info;
+int exit_handler = 0;
+
 
 double mean()
 {
@@ -43,22 +45,33 @@ void *slug_malloc(size_t size, char *WHERE)
 {   
    void *tmp;
    double timestamp = 0;
-   
+
+   /* Exit if allocating over 128MiB */
    if(size > MAX_SIZE) { 
       fprintf(stderr, "Cannot allocate more than 128MiB\n");
       exit(EXIT_FAILURE);
    }
 
+   /*Print out error if allocating size of 0 */
    if(size == 0) {
       fprintf(stderr, "Malloced size of 0\n");
    }
 
+   /* Install exit_handler if not installed*/
+   if(exit_handler == 0) {
+      atexit(slug_memstat);
+      exit_handler = 1;
+   }
+
+   /* Get current time */
    if(!gettimeofday(&tv, NULL)) {
       timestamp = tv.tv_sec * 1e6 + tv.tv_usec;
    }
 
+   /* allocated memory */
    tmp = malloc(size);
    
+   /* insert data tree */
    if(root == NULL){
       root = create_node(tmp,size,WHERE,timestamp);
    }else{

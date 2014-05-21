@@ -26,7 +26,6 @@ int main(int argc, char **argv) {
    slug_free(tmp6,FILE_POS);
    slug_free(tmp7,FILE_POS);
    slug_free(tmp8,FILE_POS); 
-   slug_memstat();
    return 0;
 }
 
