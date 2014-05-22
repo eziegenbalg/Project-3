@@ -10,17 +10,16 @@
 int main(int argc, char **argv) {
    void *tmp,*tmp1,*tmp2,*tmp3,*tmp4,*tmp5,*tmp6,*tmp7,*tmp8;
    tmp  = malloc(1 * sizeof(int));
-   tmp1 = slug_malloc(11 * sizeof(char), FILE_POS);
+   tmp1 = slug_malloc(11 * sizeof(int), FILE_POS);
    tmp2 = slug_malloc(8 *sizeof(char), FILE_POS);
-   tmp3 = slug_malloc(99 * sizeof(char), FILE_POS);
-   tmp4 = slug_malloc(1 * sizeof(char), FILE_POS);
+   tmp3 = slug_malloc(99 * sizeof(double), FILE_POS);
+   tmp4 = slug_malloc(1 * sizeof(float), FILE_POS);
    tmp5 = slug_malloc(5 * sizeof(char), FILE_POS);
-   tmp6 = slug_malloc(6 * sizeof(char), FILE_POS);
+   tmp6 = slug_malloc(6 * sizeof(int), FILE_POS);
    tmp7 = slug_malloc(7 * sizeof(char), FILE_POS);
-   tmp8 = slug_malloc(8 * sizeof(char), FILE_POS);
+   tmp8 = slug_malloc(8 * sizeof(long), FILE_POS);
    
    slug_free(tmp,FILE_POS);
-/*   free(tmp);    */
    slug_free(tmp1,FILE_POS);
    slug_free(tmp2,FILE_POS);
    slug_free(tmp3,FILE_POS);

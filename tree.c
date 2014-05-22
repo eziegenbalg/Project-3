@@ -35,7 +35,6 @@ struct node *create_node(void *address, size_t length, char *location, double ti
  n->parent = NULL;
  n->left = NULL;
  n->right = NULL;
- n->color = RED;
 
  return n;
 }
@@ -63,10 +62,10 @@ void print_tree(struct node *root)
    print_tree(root->left);
    
    if(!root->free) {
-      printf("=== Node @ %p Color: %i ===\nAddress: %p\nLength: %i\n"
+      printf("=== Node @ %p ===\nAddress: %p\nSize: %i\n"
              "Location: %s\nTimestamp: %0.0f\n"
              "===========================\n",
-             root, root->color, root->address, (int)root->length,
+             root,  root->address, (int)root->length,
              root->location, root->timestamp);
    }
    print_tree(root->right);

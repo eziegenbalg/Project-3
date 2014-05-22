@@ -8,8 +8,6 @@
 #include <stdio.h>
 #include <errno.h>
 
-#define BLACK 0
-#define RED   1
 
 struct node {
    /* data */
@@ -21,7 +19,6 @@ struct node {
    int free;
 
    /* used for tree */
-   int color;
    struct node *left,
                *right,
                *parent;

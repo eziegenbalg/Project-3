@@ -99,12 +99,17 @@ void slug_free(void *addr, char *WHERE)
          exit(-1);
          return;   
       }
-
+       
+      /*Free the address and set the free flag to true */
       free(addr);
       tmp->free = 1;
 
+     /*Adjust memstats */
       info.active_allocs--;
       info.active_size -= tmp->length;
+ 
+     /*Print error for trying to free and invalid address that is 
+        not in the tree */
    } else {
       fprintf(stderr, "Tried to free an invalid address \n");
       exit(-1);
