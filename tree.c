@@ -23,9 +23,9 @@ struct node *insert(struct node *root, struct node *n)
   return root;
  }
 
- if(root->length < n->length)
+ if(root->address < n->address)
    root->right = insert(root->right, n);
- if(root->length > n->length)
+ if(root->address > n->address)
    root->left = insert(root->left, n);
 
  return root; 

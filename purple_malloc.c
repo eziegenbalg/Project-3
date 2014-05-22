@@ -89,11 +89,14 @@ void *slug_malloc(size_t size, char *WHERE)
 void slug_free(void *addr, char *WHERE) 
 {
    struct node *tmp;
+   /*Make sure the address is in the tree */
    tmp = isInTree(root,addr);
 
+   /*If address is not in tree print a message and exit the program */
    if(tmp != NULL) {
       if(tmp->free) {
-         fprintf(stderr, "Address already freed \n");
+         fprintf(stderr, "Address: %p already freed \n",addr);
+         exit(-1);
          return;   
       }
 
@@ -104,6 +107,7 @@ void slug_free(void *addr, char *WHERE)
       info.active_size -= tmp->length;
    } else {
       fprintf(stderr, "Tried to free an invalid address \n");
+      exit(-1);
    }
 }
 
