@@ -90,22 +90,26 @@ void slug_free(void *addr, char *WHERE)
 {
    struct node *tmp;
    tmp = isInTree(root,addr);
-   printf("its printing \n"); 
-/*   if(tmp != NULL){
-        delete_node(tmp);
+
+   if(tmp != NULL) {
+      if(tmp->free) {
+         fprintf(stderr, "Address already freed \n");
+         return;   
+      }
+
+      free(addr);
+      tmp->free = 1;
+
+      info.active_allocs--;
+      info.active_size -= tmp->length;
+   } else {
+      fprintf(stderr, "Tried to free an invalid address \n");
    }
-   else{
-      printf("Tried to free an invalid address \n");
-      return;
-   }*/  
-   free(addr);
-   info.active_allocs--;
 }
 
 void slug_memstat(void) 
 {
    print_tree(root);
-   /*if((info.count - 1) == info.index){ */
    printf("Total allocations: %d\n" , info.total_allocs);
    printf("Active allocations: %d\n\n" , info.active_allocs);
 
@@ -115,7 +119,5 @@ void slug_memstat(void)
    printf("Mean of total allocs: %.2f\n", mean());
    printf("Standard Deviation: %0.2f\n", standard_dev());
    info.count = 0;
-   /*}*/
-
 }
 

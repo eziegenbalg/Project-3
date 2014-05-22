@@ -216,14 +216,22 @@ struct node *isInTree(struct node *root,void *addr){
 
 void print_tree(struct node *root)
 {
-//   if(root->address == NULL) return;
    if(root == NULL) return;
    print_tree(root->left);
-   printf("=== Node @ %p Color: %i ===\nAddress: %p\nLength: %i\n"
-          "Location: %s\nTimestamp: %0.0f\n"
-          "===========================\n",
-          root, root->color, root->address, (int)root->length,
-          root->location, root->timestamp);
-
+   
+   if(!root->free) {
+      printf("=== Node @ %p Color: %i ===\nAddress: %p\nLength: %i\n"
+             "Location: %s\nTimestamp: %0.0f\n"
+             "===========================\n",
+             root, root->color, root->address, (int)root->length,
+             root->location, root->timestamp);
+   }
    print_tree(root->right);
+
+   /* Free address and node */
+   if(!root->free) {
+      free(root->address);
+   }
+
+   free(root);
 }
