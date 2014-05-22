@@ -206,12 +206,16 @@ struct node *isInTree(struct node *root,void *addr){
    if(root == NULL){
       return NULL;
    }
-   isInTree(root->right,addr);
+   
    if(addr == root->address){
       return root;
+   } else {
+      if(root->left != NULL)
+         return isInTree(root->left,addr);
+      if(root->right != NULL)
+         return isInTree(root->right,addr);
    }
-   isInTree(root->right,addr);
-    
+   return NULL;
 }
 
 void print_tree(struct node *root)

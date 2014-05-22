@@ -24,7 +24,11 @@ int main(int argc, char **argv) {
    slug_free(tmp1,FILE_POS);
    slug_free(tmp2,FILE_POS);
    slug_free(tmp3,FILE_POS);
-
+   slug_free(tmp4,FILE_POS);
+   slug_free(tmp5,FILE_POS);
+   slug_free(tmp6,FILE_POS);
+   slug_free(tmp7,FILE_POS);
+   slug_free(tmp8,FILE_POS);
    return 0;
 }
 

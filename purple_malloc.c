@@ -14,13 +14,13 @@ mem_info info;
 int exit_handler = 0;
 
 
-double mean()
+double mean(void)
 {
    if(info.total_allocs > 0) return (double)(info.total_size/info.total_allocs);
    return 0.0;
 }
 
-double standard_dev()
+double standard_dev(void)
 {
    int tmp[MAX_ALLOCS] = {0};
    double tmp_mean = mean();
