@@ -28,7 +28,7 @@ struct node {
 };
 
 
-/* Red Black functions */
+/*Tree  functions */
 struct node *insert(struct node *root, struct node *n);
 struct node *create_node(void *address, size_t length, char *location, double timestamp);
 struct node *isInTree(struct node *root, void *address);

@@ -19,8 +19,8 @@ int main(int argc, char **argv) {
    tmp7 = slug_malloc(7 * sizeof(char), FILE_POS);
    tmp8 = slug_malloc(8 * sizeof(char), FILE_POS);
    
-/*   slug_free(tmp,FILE_POS);
-   free(tmp);   
+   slug_free(tmp,FILE_POS);
+/*   free(tmp);    */
    slug_free(tmp1,FILE_POS);
    slug_free(tmp2,FILE_POS);
    slug_free(tmp3,FILE_POS);
@@ -28,7 +28,7 @@ int main(int argc, char **argv) {
    slug_free(tmp5,FILE_POS);
    slug_free(tmp6,FILE_POS);
    slug_free(tmp7,FILE_POS);
-   slug_free(tmp8,FILE_POS);  */
+   slug_free(tmp8,FILE_POS);  
    return 0;
 }
 
